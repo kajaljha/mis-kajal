@@ -1,0 +1,96 @@
+<section id="main-content">
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-md-8">
+      <% if @invoices.present? %>
+        <%= link_to 'PAID', user_invoice_paid_index_path(current_user, @invoices.last), class: "btn btn-primary btn-xs" %>
+        <%= link_to 'UNPAID', user_invoice_unpaid_index_path(current_user, @invoices.last), class: "btn btn-primary btn-xs" %>
+      <% end %>
+      </div>
+      <div class="col-md-4">
+        <%= form_tag user_invoices_path, :method => 'get' do %>
+          <div class="field">
+            <%= text_field_tag :search ,params[:search], :id =>"tag", :list => 'listd', :onclick => "submitForm();", :autocomplete=> "off" %>
+              <datalist id='listd' >
+                <select name = "list" >
+                  <option value=""></option>
+
+                </select>
+              </datalist>
+            <%= submit_tag "Search", :name => nil, class: "btn btn-primary btn-xs" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-lg-12">
+        <section class="panel">
+          <header class="panel-heading" style="background:#2a3542;color:#ffffff;">
+              List Of All UnPaid Invoices
+          </header>
+          <table class="col-md-12 table-bordered table-striped table-hover table-condensed" id="editable-sample">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Invoice Date</th>
+                <th>Invoice #</th>
+                <th>Bill To</th>
+                <th>Currency</th>
+                <th>tax</th>
+                <th>Discount</th>
+                <th>Due Date</th>
+                <th>Note</th>
+                <th>Status</th>
+                <th></th>
+                <% if current_user.role != "Client" %>
+                  <th></th>
+                  <th>Download PDF</th>
+                <%else%>
+                  <th>Download PDF</th>
+                <%end%>
+              </tr>
+            </thead>
+            <tbody>
+              <% @unpaid_invoices.each do |invoice| %>
+                <tr>
+                  <td><%= invoice.user.first_name %></td>
+                  <td><%= invoice.invoice_date %></td>
+                  <td><%= invoice.invoice_number %></td>
+                  <td><%= invoice.bill_to %></td>
+                  <td><%= invoice.currency %></td>
+                  <td><%= invoice.tax %></td>
+                  <td><%= invoice.discount %></td>
+                  <td><%= invoice.due_date %></td>
+                  <td><%= invoice.note %></td>
+                  <td><b>UNPAID</b></td>
+                  <td><%= link_to "View", user_invoice_path(current_user,invoice), class: "btn btn-primary btn-xs"%></td>
+                  <% if current_user.role != "Client" %>
+                    <td><%= link_to "Delete", user_invoice_path(current_user, invoice),
+                    method: :delete,
+                    data: { confirm: 'Do You Want to with Continue Delete Process ?' }, class: "btn btn-primary btn-xs"%></td>
+                  <%end%>
+                  <td><%= link_to 'Download Invoice', user_invoices_path(format: 'pdf'), class: "btn btn-primary btn-xs" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <br /><br />
+          <% if current_user.role != "Client" %>
+            <%= link_to "Add an Invoice", new_user_invoice_path(current_user), class: "btn btn-primary btn-xs" %>
+          <%end%>
+            <%= link_to "Go to List", user_invoices_path(current_user), class: "btn btn-primary btn-xs" %>
+        </section>
+      </div>
+    </div>
+  </section>
+</section>
+ <script type="text/javascript">
+    function submitForm() {
+      jQuery.getJSON( "/autocomplete_invoice", function( data ) {
+        jQuery('#listd').empty();
+        for (i=0; i<data.length; i++ ){         
+          newOption = document.createElement('option');
+          newOption.value = data[i];
+          document.getElementById('listd').appendChild(newOption);
+        } 
+      });
+    } 
+  </script>

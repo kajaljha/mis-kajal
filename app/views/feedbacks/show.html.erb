@@ -1,0 +1,107 @@
+ <section id="main-content">
+  <section class="panel">
+   <div class="col-lg-12">
+     <section class="panel" style= padding-top:5px;>
+        <header class="panel-heading" style="background:#DEB887;height:50px;">
+          <bold><h4>Feedback</h4></bold>
+        </header>
+      <div class="panel-body">
+        <div class="form">
+          <div class=" form col-lg-9">
+            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+            <!-- <div class="form-group "> -->
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Feedback </label>
+                <div class="col-lg-8">
+                  <%= @feedback.feedback %><br />
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Punctuality </label>
+                  <div class="col-lg-8">
+                    <%= @feedback.punctuality %><br />
+                  </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Communication </label>
+                  <div class="col-lg-8">
+                    <%= @feedback.communication %><br />
+                  </div>
+              </div>
+               <div class="form-group ">
+                <label class="col-lg-3 control-label"> Behavior </label>
+                  <div class="col-lg-8">
+                    <%= @feedback.behavior %><br />
+                  </div>
+              </div>
+             
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Meet To Deadline</label>
+                  <div class="col-lg-8">
+                    <%= @feedback.meet_to_deadline %><br />    
+                  </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Daily Reporting </label>
+                <div class="col-lg-8">
+                  <%= @feedback.daily_reporting %><br />
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Problem Solving </label>
+                  <div class="col-lg-8">
+                    <%= @feedback.problem_solving %><br />
+                  </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Research Capabilities </label>
+                  <div class="col-lg-8">
+                    <%= @feedback.research_capabilities %><br />
+                  </div>
+              </div>
+               <div class="form-group ">
+                <label class="col-lg-3 control-label"> Self Motivated </label>
+                  <div class="col-lg-8">
+                    <%= @feedback.self_motivated %><br />
+                  </div>
+              </div>
+             
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Understanding of Tasks</label>
+                  <div class="col-lg-8">
+                    <%= @feedback.understanding_of_tasks %><br />    
+                  </div>
+              </div>
+
+
+               <div class="form-group ">
+                <label class="col-lg-3 control-label"> Working in a Team </label>
+                  <div class="col-lg-8">
+                    <%= @feedback.working_in_a_team %><br />
+                  </div>
+              </div>
+               <div class="form-group ">
+                <label class="col-lg-3 control-label"> Overall Rating </label>
+                  <div class="col-lg-8">
+                    <%= @feedback.overall_rating %><br />
+                  </div>
+              </div>
+             
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Remark</label>
+                  <div class="col-lg-8">
+                    <%= @feedback.remark %><br />    
+                  </div>
+              </div>
+               <%= link_to "BACK", user_feedbacks_path(current_user), class: "btn btn-primary btn-xs" %>
+            </form>
+          </div>
+        </div>
+      </div>
+      </section>
+      </div>
+  </section>
+</section>

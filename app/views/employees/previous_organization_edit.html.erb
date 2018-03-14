@@ -1,0 +1,90 @@
+<section id="main-content">
+  <section class="panel">
+   <div class="col-lg-12">
+     <section class="panel" style= padding-top:5px;>
+        <header class="panel-heading" style="background:#2a3542;height:50px;color:#ffffff;">
+          <bold><h4>Edit Previous Oganization Details</h4></bold>
+        </header>
+            <%= form_for @previous, :url =>previous_organization_update_user_employees_path(current_user, :prevorg => @previous.id) do |f| %>
+                
+                   <div class="panel-body">
+                    <% if @previous.errors.any? %>
+                     <div id="error_explanation" class ="alert alert-danger">
+                        <ul>
+                          <% @previous.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                           <% end %>
+                         </ul>
+                      </div>
+                    <% end %>   
+
+                     <div class=" form col-lg-9">
+                          <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                     <!-- <div class="form-group "> -->
+                              <div class="form-group ">
+                                 <label class="col-lg-3 control-label"> Company Name* </label>
+                                     <div class="col-lg-8">
+                                        <%= f.text_field :company_name, :class=>"form-control", :required => true %><br />
+                                     </div>
+                              </div>
+
+                            <div class="form-group ">
+                                <label class="col-lg-3 control-label"> Designation </label>
+                                  <div class="col-lg-8">
+                                     <%= f.text_field :designation,  :class=>"form-control" %><br />
+                                  </div>
+                            </div>
+
+                             <div class="form-group ">
+                                  <label class="col-lg-3 control-label"> Location* </label>
+                                   <div class="col-lg-8">
+                                     <%= f.text_field :location,  :class=>"form-control", :required => true %><br />
+                                   </div>
+                              </div>
+
+                              <div class="form-group ">
+                                  <label class="col-lg-3 control-label"> From Month Year* </label>
+                                   <div class="col-lg-8">
+                                     <%= f.date_select :from_month_year ,{order: [:year,:month,:day,], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 0, end_year: Date.today.year - 100}, {required: true} %><br /><br/>
+
+                                    </div>
+                               </div>
+          
+                              <div class="form-group ">
+                                   <label class="col-lg-3 control-label"> To Month Year* </label>
+                                     <div class="col-lg-8">
+                                         <%= f.date_select :to_month_year ,{order: [:year,:month,:day,], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 0, end_year: Date.today.year - 100}, {required: true} %><br /><br/>
+
+                                      </div>
+                              </div>
+
+                              <div class="form-group ">
+                                  <label class="col-lg-3 control-label"> Last CTC* </label>
+                                     <div class="col-lg-8">
+                                        <%= f.text_field :last_ctc,  :class=>"form-control", :required => true %><br />
+                                      </div>
+                              </div>
+
+                               <div class="form-group ">
+                                    <label class="col-lg-3 control-label"> Leave Reason </label>
+                                       <div class="col-lg-8">
+                                           <%= f.text_field :leave_reason,  :class=>"form-control",:required => true  %><br />
+                                       </div>
+                               </div>
+
+                               <div class="form-group">
+                                   <div class="col-lg-offset-3 col-lg-8">
+                                       <center><button class="btn btn-warning" type="back">Back</button> 
+                                       <button class="btn btn-danger" type="submit">Save Change</button></center>
+
+                                   </div>
+                               </div>
+                       </form>
+                   </div>
+               </div>
+            <% end %>
+          </section>
+      </div>
+   </section>
+</section>
+

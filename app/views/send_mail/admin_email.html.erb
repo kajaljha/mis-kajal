@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hello Admin, Feedback for Project <h4><%= @feedback.client_project_detail.project_name%></h4>of Employee <%=@user%> is:-</p>
+    
+   
+  <table border="1" style="width:100%">
+      <tr>
+        <td><h4>Feedback</h4></td>
+        <td><h4>Rating</h4></td>    
+      </tr>
+      <tr>
+        <td>Punctuality</td>
+        <td><%= @feedback.punctuality%></td>    
+      </tr>
+      <tr>
+        <td>Communication</td>
+        <td><%= @feedback.communication %></td>    
+      </tr>
+      <tr>
+        <td>Behavior</td>
+        <td><%= @feedback.behavior %></td>    
+      </tr>
+      <tr>
+        <td>Meet To Deadline</td>
+        <td><%= @feedback.meet_to_deadline %></td>    
+      </tr>
+
+      <tr>
+        <td>Daily Reporting</td>
+        <td><%= @feedback.daily_reporting %></td>    
+      </tr>
+
+      <tr>
+        <td>Problem Solving</td>
+        <td><%= @feedback.problem_solving%></td>    
+      </tr>
+
+      <tr>
+        <td>Research Capabilities</td>
+        <td><%= @feedback.research_capabilities %></td>    
+      </tr>
+
+      <tr>
+        <td>Self Motivated</td>
+        <td><%= @feedback.self_motivated %></td>    
+      </tr>
+
+      <tr>
+        <td>Understanding of Tasks</td>
+        <td><%= @feedback.understanding_of_tasks %></td>    
+      </tr>
+
+      <tr>
+        <td>Working in a Team</td>
+        <td><%= @feedback.working_in_a_team %></td>    
+      </tr>
+
+      <tr>
+        <td>Overall Rating</td>
+        <td><%= @feedback.overall_rating%></td>    
+      </tr>
+
+      <tr>
+        <td>Remark</td>
+        <td><%= @feedback.remark %></td>    
+      </tr>
+
+      <tr>
+        <td>feedback</td>
+        <td><%= @feedback.feedback %></td>    
+      </tr>
+
+  </table>
+  
+    <p>Thanks and regerds</p>
+    <%= @user_name.first_name %> <%= @user_name.last_name %>
+  </body>
+</html>

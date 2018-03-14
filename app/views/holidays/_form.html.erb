@@ -1,0 +1,249 @@
+<%= form_for((@holiday), url: (@holiday.persisted? ? user_holiday_path(current_user,@holiday) : user_holidays_path(current_user)), :html=>{:onsubmit=> "return false"}) do |f| %>
+
+        <div class="panel-body">
+                <div class="form">
+                    <% if @holiday.errors.any? %>
+                      <div id="error_explanation" class ="alert alert-danger">
+                        <ul>
+                          <% @holiday.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                          <% end %>
+                        </ul>
+                       </div>
+                    <% end %>
+
+ <section class = "panel" style ="margin:20px">
+  <section class = "panel">
+  <section class="panel" height = "40px">
+  <h4 style="background:#A4A4A4;height:30px;padding-top:5px;padding-left:12px">Personal Details</h4>
+  </section>
+
+  <div>
+    <img src="" style="width:14%;height:14%;float:left">
+    <label style="padding-left:5px"> Name: </label>
+    <%= current_user.first_name + " " + current_user.last_name if current_user.first_name.present? %>
+    <br/>
+    <label style="padding:5px"> Date Of Birth: </label>
+    <% if current_user.employee_detail.present? %>
+      <%= current_user.employee_detail.dob if current_user.employee_detail.dob.present? %>
+    <%end%>
+    <br/>
+    <label style="padding:5px"> Mobile No: </label>
+    <% if current_user.employee_detail.present? %>
+      <%= current_user.employee_detail.mobile if current_user.employee_detail.mobile.present? %>
+    <%end%>
+    <br/>
+    <label style="padding:5px"> Email Id: </label>
+    <%= current_user.email if current_user.email.present? %>
+    <br/>
+    <div class="field">
+      <%= f.label :availability, :style => "padding:5px;padding-left:6px" %>: Will you be available on this +91 -  <% if current_user.employee_detail.present? %><%= current_user.employee_detail.mobile if current_user.employee_detail.mobile.present? %><% end %> during this leave? 
+      <%= f.radio_button :availability, 'Yes',required: 'required'%> Yes
+      <%= f.radio_button :availability, 'No' %> No
+    </div>
+  </div>
+  <section class="panel" height = "40px">
+  <h4 style="background:#A4A4A4;height:30px;padding-top:5px;padding-left:12px">Note</h4>  </section> 
+  <ol style="margin-left:0px">
+  <li> You should be reachable on phone because you may be working on live project(s)/client(s), which you have handed over to somebody and that person may need some assistance for during that work further.</li>
+  <li> In worse scenario,neither you are having any email id nor your mobile number is reachable then in that case, every day you need to contact that person to whom you have handed over your work.</li>
+  <li> If you are reachable during your leave then it will be considered as flash leave.</li>
+  </ol>
+ 
+      <div class="field" id = "current" >
+       <section class="panel" height = "40px">
+       <h4 style="background:#A4A4A4;height:30px;padding-top:5px;padding-left:12px">Current Working On*</h4>  </section>
+        <%= f.radio_button :currently_working_on, 'working on client', :onclick =>"check1();" ,required: 'required'%> Working On Client
+        <%= f.radio_button :currently_working_on, 'working on project', :onclick =>"check1();" %> Working On Project
+        <%= f.radio_button :currently_working_on, 'working on both client& project', :onclick =>"check1();" %>Working on both Client&Project
+        <%= f.radio_button :currently_working_on, 'no live client/project', :id=>"click_button5", :onclick =>"check1();" %> No live client/project<br/>
+      </div>
+
+      <div class="field">
+      <section class="panel" height = "40px">
+       <h4 style="background:#A4A4A4;height:30px;padding-top:5px;padding-left:12px">Sales Email Id</h4>  </section>
+        <%= f.text_field :sales_email_id ,:id =>"tags", :list => 'listid', :onclick => "submitForm();"%>
+        <datalist id='listid' >
+          <select name = "list" >
+            <option value=""></option>
+            
+          </select>
+        </datalist>
+      </div>
+
+      <div class="field" id="el">
+      <section class="panel" height = "40px">
+       <h4 style="background:#A4A4A4;height:30px;padding-top:5px;padding-left:12px">Leave Type*</h4>  </section>
+        <%= f.radio_button :leave_type, 'Earned Leaves(EL)', :id=>"Earned_Leaves"  , :onclick =>"check();",required: 'required'%> Earned Leaves(EL)<br/>
+        <%= f.radio_button :leave_type, 'Privileged Leaves(PL)', :id=>"Priviliged_Leaves" ,:onclick =>"check();"  %> Privileged Leaves(PL)<br/>
+        <%= f.radio_button :leave_type, 'Special Leave(SL)', :id=>"Special_Leaves" ,:onclick =>"check();" %>Special Leave(SL)<br/><br/>      
+      </div>
+      <!-- date picker -->
+      <div id="Special_fields" style="display:none">
+        <%= f.label :leave_to_date, 'Date Of Birth' %>
+        <% if current_user.employee_detail.present? %> 
+        <%= f.date_field :leave_to_date, :id=>"holiday_sl_leave_to_date",  :value => (current_user.employee_detail.dob if current_user.employee_detail.present?), :required => "true" %>
+        <%end%>
+      </div>
+
+      <div class="Earned_fields" style="display:none">
+        <div class="field">
+          <%= f.label :leave_from_date %><br/>
+          <%= f.date_field :leave_from_date,:id=>"holiday_el_leave_from_date", :class => "datepicker1", :autocomplete=>"off" %><br/>
+        </div>
+        <div class="field" >
+          <%= f.label :leave_to_date %><br/> 
+          <%= f.date_field :leave_to_date,:id=>"holiday_el_leave_to_date", :class => "datepicker2", :autocomplete=>"off" %>
+        </div> 
+      </div>
+      <div class="input-group date" id="priviliged" style="display:none" >
+        <%= f.date_field :leave_to_date,:id=>"holiday_pl_leave_to_date", :class => "form-control datepicker", :autocomplete=>"off"  %>
+      </div>
+       <!-- date picker end -->
+      <div class="field">
+        <%= f.label :reason %><br>
+        <%= f.text_area :reason, :required => "true"%><br />
+      </div>
+
+
+      <div class="field">
+        <% if current_user.role == "admin" || current_user.role == "Hr" %>
+          <%= f.label :comment %><br/>
+          <%= f.text_area :comment %><br/>
+        <%end%>
+      </div>
+
+      <%= f.hidden_field :user_id, :id => "user_id", :value => current_user.id %>
+      <div class="actions">
+        <%= f.submit %>
+      </div><br/>
+ </section>
+ </section>
+ </div>
+ </div>
+<% end %>
+
+ <script type="text/javascript">
+    function check1(){
+      if(jQuery('#click_button5').is(':checked'))
+       {
+        jQuery('#tags').attr('readonly', true);
+       }
+       else
+       {
+        jQuery('#tags').attr('readonly', false);
+       }
+    }
+  
+      function submitForm() {
+        jQuery.getJSON( "/application/autocomplete", function( data ) {
+          jQuery('#listid').empty();
+          for (i=0; i<data.length; i++ ){         
+            newOption = document.createElement('option');
+            newOption.value = data[i];
+            document.getElementById('listid').appendChild(newOption);
+          } 
+        });
+      } 
+  </script>
+  
+<script type="text/javascript">
+  function check(){
+    if(jQuery('#Earned_Leaves').is(':checked'))
+     {
+      jQuery('.Earned_fields').show() 
+      jQuery('#priviliged').hide()
+      jQuery('#Special_fields').hide()
+     }
+     else if(jQuery('#Special_Leaves').is(':checked'))
+     {
+      jQuery('.Earned_fields').hide()
+      jQuery('#Special_fields').show()
+      jQuery('#priviliged').hide()
+     }
+     else
+     {
+      jQuery('.Earned_fields').hide()
+      jQuery('#Special_fields').hide()
+      jQuery('#priviliged').show()
+     }
+  }
+
+  jQuery(document).ready(function(){
+    jQuery(".Earned_fields input.datepicker1").datepicker({ 
+      format: "dd/mm/yyyy",
+      startDate: "currentDate"
+    });
+
+    jQuery(".Earned_fields input.datepicker2").datepicker({ 
+      format: "dd/mm/yyyy",
+      startDate: "currentDate"
+    });
+
+    jQuery('#priviliged input.datepicker').datepicker({
+      orientation: "top left",
+      multidateSeparator: 12,
+      daysOfWeekDisabled: [0,1,2,3,4,5], // only saturdays enabled.
+      todayHighlight: true,
+       format: "dd/mm/yyyy",
+       startDate: "currentDate"
+    });
+
+    jQuery(function(){
+      jQuery("#new_holiday").on('submit', function(){
+        if(jQuery('#holiday_availability_yes').is(':checked'))  {
+          var availability = true;
+        }
+        else if(jQuery('#holiday_availability_no').is(':checked')){
+          var availability = false;
+        }
+
+        var currently_working_on = jQuery("input[name='holiday[currently_working_on]']:checked").val();
+
+        if(jQuery('#Earned_Leaves').is(':checked')){
+          var leave_type = "Earned Leaves(EL)"
+        }
+        else if(jQuery('#Special_Leaves').is(':checked')){
+          var leave_type = "Special Leave(SL)"
+        }
+        else{
+          var leave_type = "Privileged Leaves(PL)"
+        }
+
+        var leave_to_sl = jQuery('#holiday_sl_leave_to_date').val();
+        var leave_to_er = jQuery('#holiday_el_leave_to_date').val();
+        var leave_to_pr = jQuery('#holiday_pl_leave_to_date').val();
+        var leave_from = jQuery('#holiday_el_leave_from_date').val();
+        var user_id = jQuery('#user_id').val();
+        var inputs = jQuery('#new_holiday :input');
+
+        if (leave_from > leave_to_er && leave_type == "Earned Leaves(EL)" ){
+          alert ("to_date should be greater or equal to from_date!");
+          return false;
+        }
+        var values = {};
+        inputs.each(function() {
+            values[this.name] = jQuery(this).val();
+        });
+
+        jQuery.ajax({
+          type:'POST', 
+          url: '/' + 'users' + '/' + user_id + '/' + 'holidays', 
+          data: { leave_to_sl,leave_to_er,leave_to_pr,leave_from,leave_type,availability,currently_working_on,values },
+          dataType: "html",
+           success: function () {
+              window.alert("Leaved Applied!");
+              window.location.href = "/users/" + <%=current_user.id%> + "/holidays";
+           },
+           error: function (){
+              window.alert("something wrong!");
+           }
+        });
+
+      });
+    });
+  });
+   
+ </script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">

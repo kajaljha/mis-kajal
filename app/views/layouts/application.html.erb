@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Mosaddek">
+  <meta name="keyword" content="Affi, Affimintus, affimintus, mis, affi-mis">
+  <title>Affi MIS</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <section id="container" >
+    <%  if user_signed_in? %>
+      <%= render :partial => 'layouts/header' %>
+      <%= render :partial => 'layouts/side_bar' %>
+    <% end %>
+    <%= render 'layouts/messages' %>
+    <%= yield %>
+    <%= render :partial => 'layouts/footer' %>
+  </section>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<section id="main-content">
+    <section class="wrapper">
+       <div class="row">
+         <div class="col-lg-12">
+            <section class="panel">
+               <header class="panel-heading" style="background:#2a3542;color:#ffffff;">
+                  <bold><h4>Consultant Details</h4></bold>
+                </header>
+                  <table class="table table-bordered table-striped table-hover table-condensed">
+                   <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Commission</th>
+                          <th>Contact</th>
+                          <th>Skype Id</th>
+                          <th>Email Id</th>
+                          <th>Location</th>
+                          <th>Address</th>
+                          <th>Bank Account No</th>
+                          <th>Bank Name</th>
+                          <th>Branch Name</th>
+                          <th>IFSC Code</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @consultants.each do |consultant| %>
+                          <tr>
+                            <td><%= consultant.name.titleize %></td>
+                            <td><%= consultant.commission%></td>
+                            <td><%= consultant.contact%></td>
+                            <td><%= consultant.skype_id%></td>
+                            <td><%= consultant.email_id%></td>
+                            <td><%= consultant.location.titleize%></td>
+                            <td><%= consultant.address %></td>
+                            <td><%= consultant.bank_account_no%></td>
+                            <td><%= consultant.bank_name.titleize%></td>
+                            <td><%= consultant.branch_name.titleize %></td>
+                            <td><%= consultant.ifsc_code%></td>
+                            <td><%= link_to "Edit",  sales_consultant_edit_user_sales_path(current_user, :consultants => consultant),class: "btn btn-primary btn-xs"  %></td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                  </table>
+                  </section>
+                      <%= link_to "Add More",  sales_consultant_new_user_sales_path(current_user),class: "btn btn-primary btn-xs" %>
+          </div>
+        </div>
+    </section>
+</section>
+ 

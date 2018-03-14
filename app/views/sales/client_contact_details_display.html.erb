@@ -1,0 +1,36 @@
+<section id="main-content">
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <section class="panel">
+          <header class="panel-heading" style="background:#2a3542;color:#ffffff;">
+            <bold><h4>Client Contact Details</h4></bold>        
+         </header>
+
+            <table class="table" border="2">
+              <tr>
+                <th>Skype Id</th>
+                <td><%= @contact_detail.skype_id %></td>
+              </tr>
+              <tr>
+                <th>Personal Email Id</th>
+                <td><%= @contact_detail.personal_email_id%></td>
+              </tr>
+              <tr>
+                <th>Official Email Id</th>
+                <td><%= @contact_detail.official_email_id%></td>
+              </tr>
+              <tr>
+                <th>Phone No</th>
+                <td><%= @contact_detail.phone_no%></td>
+              </tr>
+            </table>
+            <%= link_to "Edit", client_contact_details_edit_user_sales_path(current_user),class: "btn btn-primary btn-xs" %> || 
+            <%= link_to "Back", users_path, class: "btn btn-primary btn-xs"  %>
+
+        </section>
+      </div>
+    </div>
+  </section>
+
+

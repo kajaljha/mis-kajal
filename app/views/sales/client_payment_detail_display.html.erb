@@ -1,0 +1,47 @@
+<section id="main-content">
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <section class="panel">
+          <header class="panel-heading" style="background:#2a3542;color:#ffffff;">
+            <bold><h4>Client Payment Details</h4></bold>        
+           </header>
+              <% if @clients.present? %>
+                <table class="table" border="2">
+                  <%if current_user.role != "Client"%>
+                    <tr>
+                      <th>Client</th>
+                      <td><%= get_client(@clients.user_id) %></td>
+                    </tr>
+                  <%end%>
+                  <tr>
+                    <th>Payment Mode</th>
+                    <td><%= @clients.payment_mode %></td>
+                  </tr>
+                  <tr>
+                    <th>Payment Amount</th>
+                    <td><%= @clients.payment_amount %></td>
+                  </tr>
+                  <tr>
+                    <th>Payment Date</th>
+                    <td><%= @clients.payment_date %></td>
+                  </tr>
+                </table>
+                <%if current_user.role != "Client"%>
+                  <%= link_to "Back", client_lists_user_sales_path(current_user),class: "btn btn-primary btn-xs" %> || 
+                <%= link_to "Edit", client_payment_detail_edit_user_sales_path(current_user, :assigned_id=>@clients.user_id) ,class: "btn btn-primary btn-xs" %>
+                <%else%>
+                  <%= link_to "Back", users_Path, class: "btn btn-primary btn-xs"  %>
+                <%end%>
+                <hr style="background-color: #123455;height: 2px;">
+                <label style="padding:5px"> Note: <font color="red"> For any changes in your "Payment Details", Please contact HR department for same.</font></label>
+              <%else%>
+                <hr style="background-color: #123455;height: 2px;">
+                <label style="padding:5px"> Remark: <font color="red"> You do not have any of your "Payment Details", Please contact HR department for same.</font></label>
+                <hr style="background-color: #123455;height: 2px;">
+              <%end%>  
+        </section>
+      </div>
+    </div>
+  </section>
+</section>

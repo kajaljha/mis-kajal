@@ -1,0 +1,193 @@
+<section id="main-content">
+  <section class="panel">
+  <div class="col-lg-12">
+  
+    <section class="panel" style= padding-top:5px;>
+       <header class="panel-heading" style="background:#2a3542;height:50px;color:#ffffff;">
+            <bold><h4>Edit Employee Details</h4></bold>
+       </header>
+
+            <%= form_for @employee, :url =>user_employee_path(current_user,@employee)  do |f| %>
+
+             <div class="form" >
+        	       <% if @employee.errors.any? %>
+                      <div id="error_explanation" class ="alert alert-danger">
+                        <ul>
+                           <% @employee.errors.full_messages.each do |message| %>
+                             <li><%= message %></li>
+                            <% end %>
+                        </ul>
+                      </div>
+                  <% end %>
+                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+               	
+                        <div class="col-lg-9">
+                          <h4> Basic Details </h4>
+                            <div class="form-group ">
+                              <label class="col-lg-3 control-label"> First Name *</label>
+                              <%#= f.label :first_name, :class=>"col-lg-3 control-label" %>
+                               <div class="col-lg-8">
+                                <%= f.text_field :first_name, :class=>"form-control", :value => (current_user.first_name if current_user.first_name.present? || f.object.new_record? ),:readonly => true %><br/>
+                               </div>
+                            </div>
+                     
+                            <div class="form-group ">
+                              <label class="col-lg-3 control-label"> Last Name *</label>
+                              <div class="col-lg-8">
+                                <%= f.text_field :last_name, :class=>"form-control" ,:value => (current_user.last_name if current_user.last_name.present? || f.object.new_record? ),:readonly => true %><br/>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-lg-3 control-label"> Date of Birth* </label>
+                                <div class="col-lg-8">
+                                  <%= f.date_select :dob ,{order: [:year,:month,:day,], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 0, end_year: Date.today.year - 100} , {required: true}%><br /><br/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-lg-3 control-label"> Date of Joining* </label>
+                                <div class="col-lg-8">
+                                  <%= f.date_select :doj ,{order: [:year,:month,:day,], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 0, end_year: Date.today.year - 100}, {required: true} %><br /><br/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-lg-3 control-label"> Blood Group </label>
+                                <div class="col-lg-8">
+                                  <%= f.text_field :blood_group, :class=>"form-control" %><br/>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                              <label class="col-lg-3 control-label"> Designation </label>
+                              <div class="col-lg-8">
+                                <%= f.text_field :designation, :class=>"form-control" %><br/>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-lg-9">
+                            <h4>Contact Details</h4>
+                              <div class="form-group ">
+                                <label class="col-lg-3 control-label"> Personal Email Id *</label>
+                                  <div class="col-lg-8">
+                                    <%= f.text_field :personal_email_id, :class=>"form-control" , :value => (current_user.email if current_user.email.present? || f.object.new_record? ),:readonly => true %><br/>
+                                  </div>
+                              </div>
+
+                              <div class="form-group ">
+                                <label class="col-lg-3 control-label"> Official Email Id *</label>
+                                   <div class="col-lg-8">
+                                      <%= f.text_field :oficial_email_id, :class=>"form-control" , :required => true %><br/>
+                                    </div>
+                              </div>
+
+                              <div class="form-group ">
+                                <label class="col-lg-3 control-label"> Skype Id*</label>
+                                  <div class="col-lg-8">
+                                    <%= f.text_field :skype_id, :class=>"form-control"  ,:required => true %><br/>
+                                  </div>
+                              </div>
+
+                              <div class="form-group ">
+                                <label class="col-lg-3 control-label"> Mobile No* </label>
+                                  <div class="col-lg-8">
+                                    <%= f.text_field :mobile, :class=>"form-control", :required => true %><br/>
+                                  </div>
+                               </div>
+
+                               <div class="form-group ">
+                                 <label class="col-lg-3 control-label"> Landline No</label>
+                                   <div class="col-lg-8">
+                                      <%= f.text_field :landline, :class=>"form-control"  %><br/>
+                                   </div>
+                                </div>
+
+                                <div class="form-group ">
+                                  <label class="col-lg-3 control-label"> Current Address*</label>
+                                     <div class="col-lg-8">
+                                       <%= f.text_area :current_address, :class=>"form-control", :required => true, :id => "current_address"%><br/>
+                                          <input type="checkbox" name="copy1" id="copy_add" onclick="check();">
+                                          <p> Is permanent address same as corrent address?</p>
+                                           <!-- <p>Is permanent address same as corrent address?</p> -->
+                                      </div>
+                                </div>
+                              <tr>
+                               </tr>
+
+                               <div class="form-group ">
+                                  <label class="col-lg-3 control-label"> Permanent Address* </label>
+                                     <div class="col-lg-8">
+                                        <%= f.text_area :permanent_address, :class=>"form-control" , :required => true, :id => "permanent_address" %><br/>
+                                      </div>
+                                </div>
+                              </div>
+
+                              
+
+        				             <div class="col-lg-9">
+        				                 <h4>Parent/Guardian Details</h4>
+        							              <div class="form-group ">
+        								               <label class="col-lg-3 control-label"> Guardian Full Name*</label>
+        								               <div class="col-lg-8">
+        								                 <%= f.text_field :guardian_full_name, :class=>"form-control",:required => true %><br/>
+        							                 </div>
+        							              </div>
+
+        									           <div class="form-group ">
+        										           <label class="col-lg-3 control-label"> Guardian Mobile No </label>
+        										            <div class="col-lg-8">
+        										              <%= f.text_field :guardian_mobile, :class=>"form-control" %><br/>
+        									              </div>
+        									            </div>
+
+        								              <div class="form-group ">
+        									               <label class="col-lg-3 control-label"> Guardian Landline No </label>
+        									                 <div class="col-lg-8">
+        									                   <%= f.text_field :guardian_landline, :class=>"form-control" %><br/>
+        								                    </div>
+        								                </div>
+
+        								                <div class="form-group ">
+                    									     <label class="col-lg-3 control-label"> Guardian Address* </label>
+                    									       <div class="col-lg-8">
+                    									         <%= f.text_area :guardian_address, :class=>"form-control" , :required => true %><br/>
+                    								          </div>
+                    								    </div>
+                    					     </div>
+
+                    		                <div class="form-group">
+                    	                     <div class="col-lg-offset-3 col-lg-4">
+                                            <center>
+                      			                   <button class="btn btn-warning" type="reset">Back</button>
+                      			                   <button class="btn btn-danger" type="submit">Save Change </button>
+                                            </center>
+                                          <br/><br/>
+
+                                            </div>
+                                         </div>
+            			          </form>
+            			       </div>
+		                    </div>
+                      <% end %>
+                    </section>
+                  </div>
+                </section>
+              </section>
+
+<script type="text/javascript">
+  function check(){ 
+    if(jQuery("#copy_add").is(':checked'))
+     {
+      jQuery('#permanent_address').val(jQuery('#current_address').val()).attr('readonly', true);
+     }
+    else
+     {
+       jQuery('#permanent_address').val("").attr('readonly', false);
+     }
+  }
+</script>
+
+
+

@@ -1,0 +1,105 @@
+<section id="main-content">
+   <section class="panel" style ="margin:20px">
+        <section class="panel" >
+          <div class="col-md-12" style="background:#2a3542;color:#ffffff;height:50px;padding-top:10px;padding-left:12px;">
+            <div class="col-md-11"><h4>Leave Application </h4></div>
+            <div class="col-md-1"> <%= link_to "BACK", user_holidays_path(current_user), class: "btn btn-link btn-xs", :style=>"color:#ffffff;height:50px;;padding-top:10px;"%></div>
+        </section><hr/>
+          </div>
+            <div>
+             <img src="" style="width:20%;height:20%;float:left">
+            </div>
+
+           <div >
+              <label style="padding-left:5px"> User Name </label>
+                <%= employee_details.first_name.titleize + "."+ employee_details.last_name.titleize %>
+              <br/>
+              <label style="padding:5px"> First Name </label>
+                <%= employee_details.first_name.titleize %><br/>
+              <label style="padding:5px"> Last Name </label>
+               <%= employee_details.last_name.titleize %>
+              <br/>
+              <label style="padding:5px"> Date Of Birth </label>
+                <%= employee_details.dob %>               
+              <br/>
+             <label style="padding:5px"> Mobile No </label>
+              <%= employee_details.mobile %><br/>
+              <label style="padding:5px"> Email Id </label>
+                <%= employee_details.personal_email_id %>
+              <br/>
+              <label style="padding:5px"> Note: <font color="red">You are not authorized to change these data, if anything is missing or incorrect, please contact HR department for same.</font></label>
+          </div>
+            
+            <div class="form-group ">
+               <label class="col-lg-12 control-label" style="background:#FFFFE0; height:30px;  padding-top:5px"><strong>Availability During Leave</strong>
+               </label>
+                 <div class="col-lg-12" style ="padding-bottom:1px">
+                    Will <%= employee_details.first_name.titleize + " "+ employee_details.last_name.titleize %> available on this  +91 -  <%= employee_details.mobile %> during this leave ? - &nbsp; <%= @holiday.availability %><br />   
+                 </div>
+            </div>
+            <br />
+
+              <div class="form-group ">
+               <label class="col-lg-12 control-label" style="background:#FFFFE0; height:30px; padding-top:5px"><strong> Currently Working On </strong>
+               </label>
+                  <div class="col-lg-12" style ="padding-top:1px">
+                    <%= @holiday.currently_working_on %><br />
+                  </div>
+              </div>
+
+               <div class="form-group ">
+                 <label class="col-lg-12 control-label" style="background:#FFFFE0; height:30px; padding-top:5px"><strong>Sales Email Id</strong></label>
+                   <div class="col-lg-12" style ="padding-top:1px">
+                    <%= @holiday.sales_email_id %><br />
+                   </div>
+                </div>
+              
+               <div class="form-group">
+                 <label class="col-lg-12 control-label" style="background:#FFFFE0; height:30px; padding-top:5px"><strong>Leave Details</strong>
+                 </label></div>
+
+              <div class="col-lg-12">
+                <div class="col-lg-4"><label class="control-label" style="padding-top:5px"><strong> Leave From Date</strong></label></div>
+                  <div class="col-lg-4" style ="padding-top:5px">
+                    <%= @holiday.leave_from_date %><br/>
+                  </div>
+              </div>
+                 
+              <div class="col-lg-12">
+                <div class="col-lg-4"><label class="control-label" style="padding-top:5px"><strong> Leave To Date</strong></label></div>
+                  <div class="col-lg-4" style ="padding-top:5px">
+                    <%= @holiday.leave_to_date %><br/>
+                  </div>
+              </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="col-lg-4"><label class="control-label" style="padding-top:5px"><strong> Leave Type</strong></label></div>
+                  <div class="col-lg-4" style ="padding-top:5px">
+                    <%= @holiday.leave_type%><br/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="col-lg-4"><label class="control-label" style="padding-top:5px"><strong> Reason</strong></label></div>
+                  <div class="col-lg-4" style ="padding-top:5px">
+                    <%= @holiday.reason %><br/>
+                  </div>
+                </div>
+              </div>
+              
+               <div class="col-lg-12">
+                <div class="col-lg-4"><label class="control-label" style="padding-top:5px"><strong>Status</strong></label></div>
+                  <div class="col-lg-4" style ="padding-top:5px">
+                    <%= @holiday.status %><br/>
+                  </div>
+              </div>
+              </div>
+             
+            </form>
+          </div>
+        </div>
+      </div>
+      </section>
+  </section>      

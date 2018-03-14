@@ -1,0 +1,59 @@
+<section id="main-content">
+  <section class="panel">
+   <div class="col-lg-12">
+     <section class="panel" style= padding-top:5px;>
+        <header class="panel-heading" style="background:#2a3542;color:#ffffff;">
+          <bold><h4>Client Assigned Resource Details</h4></bold>
+        </header>
+            <%= form_for @client_assigned, :url =>  client_assigned_resources_create_user_sales_path(current_user,:assigned_id=>@client_user) do |f| %>
+            <div class=" col-lg-3">
+            </div>
+            <div class="panel-body">
+            <div class=" form">
+              <% if @client_assigned.errors.any? %>
+              <div id="error_explanation" class ="alert alert-danger">
+                <ul>
+                  <% @client_assigned.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+              <% end %>
+              <div class=" form col-lg-9">
+                <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action   ="">
+                  <div class="form-group ">
+                    <label class="col-lg-3 control-label"> Company Name* </label>
+                    <div class="col-lg-8">
+                      <%= f.text_field :company_name ,:class=>"form-control", :required => true %><br />
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-lg-3 control-label">Location* </label>
+                    <div class="col-lg-8">
+                      <%= f.text_field :location,:class=>"form-control", :required => true %><br />
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label class="col-lg-3 control-label">Designation* </label>
+                    <div class="col-lg-8">
+                      <%= f.text_field :designation ,:class=>"form-control", :required => true %><br />
+                    </div>
+                  </div>
+                  <%= f.hidden_field :sales_id, :value=>current_user.id %>
+                  <div class="form-group">
+                    <div class="col-lg-offset-3 col-lg-9">
+                      <center>
+                      <%= link_to "Back", client_lists_user_sales_path(current_user),class: "btn btn-primary btn-xs" %>
+                      <button class="btn btn-danger" type="submit">Save Assigned Resources Details</button>
+                      <button class="btn btn-warning" type="reset">Reset</button></center>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </section>
+    </div>
+  </section>
+</section>

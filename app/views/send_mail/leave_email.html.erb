@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><b>Respected HR,</b></p>
+    <p>
+  
+      MY name is &nbsp;<%= @user.first_name %> ,I am Employee of Affimintus Technology.<br>
+    </p>
+    <p>
+      My email ID is <%= @user.email %><br>
+    </p>
+    <p>Leave Details:-</p>
+    <p>
+      Name: <%= @user.first_name %><br/>
+      Email ID : <%= @user.email %><br>
+      Type Of Leave: <%= @holiday.leave_type %><br/>
+      Reason: <%= @holiday.reason %><br/>
+      Leave Date To: <%= @holiday.leave_from_date %><br>
+      Leave Date From: <%= @holiday.leave_to_date %><br/>
+      Thanks and regards<br/>
+      &nbsp;<%= @user.first_name %>
+    </p>
+  </body>
+</html>

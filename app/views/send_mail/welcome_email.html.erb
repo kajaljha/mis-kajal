@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hello <%= @user.first_name %>,</p>
+    <br/>
+    <p>
+      <b>Welcome to <a href="http://www.affimintus.com/">Affimintus.</a></b>
+    </p>
+    <p>
+      Your account is successfully created in our MIS system.<br>
+    </p>
+    <p>
+      Your username is: <%= @user.user_name %><br/>
+      Your password is: <%= @user.first_name.downcase + @user.last_name[0].downcase + "@123" %>
+    </p>
+    <p>Thanks for joining Affimintus family and have a great time!</p>
+    <br/>
+    <p>Best</p>
+    <p>Team Affimintus</p>
+  </body>
+</html>
+

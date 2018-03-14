@@ -1,0 +1,51 @@
+<section id="main-content">
+   <section class="wrapper">
+     <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading" style="background:#2a3542;color:#ffffff;">
+                 <bold><h4>Client Assigned Resource Details</h4></bold>         
+               </header>
+                  <% if @client_assigned.present? %>
+                    <table class="table table-bordered table-striped table-hover table-condensed">
+                      <thead>
+                        <tr>
+                          <th>Company Name</th>
+                          <th>Location</th>
+                          <th>Designation</th>
+                          <%if current_user.role != "Client"%>
+                            <th>Client</th>
+                            <th>Action</th>
+                          <%end%>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @client_assigned.each do |client_assigned| %>
+                          <tr>
+                            <td><%= client_assigned.company_name %></td>
+                            <td><%= client_assigned.location.titleize%></td>
+                            <td><%= client_assigned.designation%></td>
+                            <%if current_user.role != "Client"%>
+                              <td><%= get_client(client_assigned.user_id) %></td>
+                              <td><%= link_to "Edit",  client_assigned_resources_edit_user_sales_path(current_user, :clientresource => client_assigned, :assigned_id=>client_assigned.user_id) ,class: "btn btn-primary btn-xs"%></td>
+                            <%end%>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                   </table>
+                    </section>
+                    <%if current_user.role != "Client"%>
+                      <%= link_to "Go To Clients",  client_lists_user_sales_path(current_user),class: "btn btn-primary btn-xs" %>
+                    <%else%>
+                      <%= link_to "Back", users_path, class: "btn btn-primary btn-xs"  %>
+                    <%end%>
+                    <hr style="background-color: #123455;height: 2px;">
+                    <label style="padding:5px"> Note: <font color="red"> For any changes in your "Assigined Resources", Please contact HR department for same.</font></label>
+                  <%else%>
+                    <hr style="background-color: #123455;height: 2px;">
+                    <label style="padding:5px"> Remark: <font color="red"> You do not have any of your "Assigned Resources", Please contact HR department for same.</font></label>
+                    <hr style="background-color: #123455;height: 2px;">
+                  <%end%>  
+          </div>
+       </div>
+  </section>

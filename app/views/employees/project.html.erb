@@ -1,0 +1,51 @@
+<section id="main-content">
+  <center><h3 style="background:#2a3542;color:#ffffff;">Project Details</h3></center>
+  <%= form_for [current_user, current_user.project_details.build], :url => project_record_user_employees_path(current_user) do |f| %>
+    <div class= "all_center">
+      <p>
+        <%= f.label :project_name %><br>
+        <%= f.text_field :project_name %>
+      </p><br>
+      
+      <p>
+        <%= f.label :your_role %><br>
+        <%= f.text_field :your_role %>
+      </p><br>
+
+      <p>
+        <%= f.label :project_url %><br>
+        <%= f.text_field :project_url %>
+      </p><br>
+
+      <p>
+        <%= f.label :project_duration %><br>
+        <%= f.text_field :project_duration %>
+      </p><br>
+
+      <p>
+        <%= f.label :project_description %><br>
+        <%= f.text_area :project_desc, :rows=>4, :cols=>25 %>
+      </p><br>
+
+      <p>
+        <%= f.label :technical_stack %><br>
+        <%= f.text_field :technical_stack %>
+      </p><br>
+
+      <p>
+        <%= f.label :client_name %><br>
+        <%= f.text_field :client_name %>
+      </p><br>
+
+
+      <p>
+        <%= f.label :comp_name %><br>
+        <%= f.text_field :comp_name %>
+      </p><br>
+     
+      <p>
+        <%= f.submit 'submit', :class=> "btn btn-primary btn-sm" %>
+      </p>
+    </div>
+  <% end %>
+</section>

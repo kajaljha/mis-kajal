@@ -1,0 +1,45 @@
+<section id="main-content">
+  <center><h3 style="background:#2a3542;color:#ffffff;">Previous Oganization Details</h3></center>
+  <%= form_for [current_user, current_user.previous_comp_details.build], :url =>previous_organization_record_user_employees_path(current_user) do |f| %>
+    <div class="all_center">
+      <p>
+        <%= f.label :company_name %><br>
+        <%= f.text_field :company_name %>
+      </p><br>
+     
+      <p>
+        <%= f.label :location %><br>
+        <%= f.text_field :location %>
+      </p><br>
+     
+      <p>
+        <%= f.label :designation %><br>
+        <%= f.text_field :designation %>
+      </p><br>
+
+      <p>
+        <%= f.label :from_month_year %><br>
+        <%= f.text_field :from_month_year, :class=> "datepicker" %>
+      </p><br>
+
+      <p>
+        <%= f.label :to_month_year %><br>
+        <%= f.text_field :to_month_year, :class=> "datepicker" %>
+      </p><br>
+
+      <p>
+        <%= f.label :last_ctc %><br>
+        <%= f.text_field :last_ctc %>
+      </p><br>
+
+      <p>
+        <%= f.label :leave_reason %><br>
+        <%= f.text_area :leave_reason, :rows=>4, :cols=>25 %>
+      </p><br>
+     
+      <p>
+        <%= f.submit 'submit', :class=> "btn btn-primary btn-sm" %>
+      </p>
+    </div>
+  <% end %>
+</section>

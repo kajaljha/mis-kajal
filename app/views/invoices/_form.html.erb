@@ -1,0 +1,177 @@
+<section id="main-content">
+  <section class="panel" style ="margin:20px">
+    <center><h2 style="background:#2a3542;color:#ffffff;">Create A New Invoice</h2></center>
+   
+    <%#= collection_select_tag(@invoice, User.where("role=?", "Client"), :id, :first_name, {:prompt => "Select a Client"}) %>
+    <%= nested_form_for @invoice, url: (@invoice.persisted? ? user_invoice_path(current_user,@invoice) : user_invoices_path(current_user)) do |f| %>
+      <div class="col-lg-3">
+      </div>
+      <div class="panel-body">
+        <div class="form">
+          <% if @invoice.errors.any? %>
+            <div id="error_explanation" class ="alert alert-danger">
+              <ul>
+                <% @invoice.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+             </div>
+          <% end %>
+          <div class=" form col-lg-9">
+            <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+            <!-- <div class="form-group "> -->
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Select a Client * </label>
+                <div class="col-lg-8">
+                  <%= select_tag "client_name", options_from_collection_for_select(User.where("role=?", "Client"), :id, :first_name),:prompt=>"Select A Client", class: "form-control",:required => true %><br />
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Invoice Date * </label>
+                <div class="col-lg-8" id="invoicedate">
+                  <%= f.text_field :invoice_date, :class=>"form-control datepicker", :style => "text-transform: capitalize;", :placeholder => "Please select A Date",:required => true %><br />
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Invoice Number  </label>
+                  <div class="col-lg-8">
+                    <%= f.text_field :invoice_number, :style => "text-transform: capitalize;", :class=>"form-control", :maxlength => 5, readonly: true %><br />
+                  </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Bill To </label>
+                  <div class="col-lg-8">
+                    <%= f.text_field :bill_to, :style => "text-transform: capitalize;", :class=>"form-control", readonly: true %><br />
+                    <%#= f.collection_select(:bill_to, User.where("role=?", "Client"), :id, :first_name, {:prompt   => "Select a Client"}) %>
+                  </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Currency </label>
+                  <div class="col-lg-8">
+                    <%= f.select(:currency, options_for_select([[ "AUD - Australian Dollars","AUD - Australian Dollars"], ["BRL - Brazilian Reals","BRL - Brazilian Reals"], ["CAD - Canadian Dollars","CAD - Canadian Dollars"], ["CHF - Swiss Francs","CHF - Swiss Francs"], ["COP - Colombia Peso","COP - Colombia Peso"], ["CZK - Czech Koruny","CZK - Czech Koruny"], ["DKK - Danish Kroner","DKK - Danish Kroner"], ["EUR - Euros","EUR - Euros"], ["GBP - British Pounds","GBP - British Pounds"], ["GEL - Georgian Lari","GEL - Georgian Lari"], ["HKD - Hong Kong Dollars","HKD - Hong Kong Dollars"], ["HUF - Hungarian Forints","HUF - Hungarian Forints"], ["IDR - Indonesian Rupiah","IDR - Indonesian Rupiah"], ["ILS - Israeil New Shekels","ILS - Israeil New Shekels"], ["INR - Indian Rupee","INR - Indian Rupee"], ["JPY - Japanese Yen","JPY - Japanese Yen"], ["MXN - Mexican Pesos","MXN - Mexican Pesos"], ["MYR - Malaysian Ringgit","MYR - Malaysian Ringgit"], ["NGN - Nigerian Naira","NGN - Nigerian Naira"], ["NOK - Norwegian Kroner","NOK - Norwegian Kroner"], ["NZD - New Zealand Dollars","NZD - New Zealand Dollars"], ["PGK - Papua New Guinean kina","PGK - Papua New Guinean kina"], ["PHP - Philippine Pesos","PHP - Philippine Pesos"], ["PLN - Polish Zlotys","PLN - Polish Zlotys"], ["RMB - Renminbi","RMB - Renminbi"], ["SEK - Swedish Krona","SEK - Swedish Krona"], ["SGD - Singapore Dollars","SGD - Singapore Dollars"], ["THB - Thai Baht","THB - Thai Baht"], ["TWD - New Taiwan Dollars","TWD - New Taiwan Dollars"], ["USD - U.S. Dollars","USD - U.S. Dollars"], ["VND - Vietnamese Dong","VND - Vietnamese Dong"], ["ZAR - South African Rand","ZAR - South African Rand"]], ["INR - Indian Rupee","INR - Indian Rupee"]), {}, {class: "form-control"}) %><br />
+                  </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Tax *</label>
+                  <div class="col-lg-8">
+                    <%= f.text_field :tax, :style => "text-transform: capitalize;", :class=>"form-control",:required => true %><br />
+                  </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Discount * </label>
+                  <div class="col-lg-8">
+                    <%= f.text_field :discount, :style => "text-transform: capitalize;", :class=>"form-control",:required => true %><br />
+                  </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Due Date * </label>
+                  <div class="col-lg-8" id="duedate">
+                    <%= f.text_field :due_date, :style => "text-transform: capitalize;", :class=>"form-control datepicker", :placeholder => "Please select A Date",:required => true %><br />
+                  </div>
+              </div>
+
+              <div class="form-group ">
+                <div class="col-lg-12" >
+                  <table id="tasks">
+                    <%= f.fields_for :invoice_items,:wrapper => false do |invoice_item| %>
+                    <tr class="fields">
+                      <td>Item:<%= invoice_item.text_field :item, :required => true %></td>
+                      <td>Description:<%= invoice_item.text_field :description , :required => true%></td>
+                      <td>Unit Cost:<%= invoice_item.text_field :unit_cost, :required => true %></td>
+                      <td>Quantity:<%= invoice_item.text_field :quantity, :required => true %></td>
+                      <td>Price<%= invoice_item.text_field :price, :onclick=>"get_price(this);",:required => true %></td>
+                      <td>&times;<%= invoice_item.link_to_remove "Remove", class: "btn btn-primary btn-xs" %></td>
+                      
+                      <script type="text/javascript">
+                        function get_price(ele){
+                          var price_name = jQuery(ele).attr('name')
+                          var uniq_number = /\d+/.exec(price_name)[0] //unique number in the name of every input.
+                          var unit_cost = jQuery("input[name='invoice[invoice_items_attributes][" + uniq_number + "][unit_cost]']").val();
+                          var quantity = jQuery("input[name='invoice[invoice_items_attributes][" + uniq_number + "][quantity]']").val();
+                          jQuery(ele).val(unit_cost * quantity).attr('readonly', true);
+
+                        }
+                      </script>
+                    <% end %><br><br>
+                  <p><%= f.link_to_add "Add an Item to Invoice", :invoice_items, class: "btn btn-primary btn-xs" %></p>
+                  </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <label class="col-lg-3 control-label"> Note </label>
+                  <div class="col-lg-8">
+                    <%= f.text_area :note, :style => "text-transform: capitalize;", :class=>"form-control" %><br />
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-lg-offset-3 col-lg-8">
+                  <center><button class="btn btn-danger" type="submit">Create Invoice</button>
+                  </center>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </section>
+</section>
+
+<script type="text/javascript">
+  jQuery(function(){
+    jQuery("#client_name").on("change", function(){
+      var number = "<%= format('%04d', (last_invoice_id + 1 + 60)) %>"
+      var id = jQuery("#client_name").val();
+
+      jQuery.ajax({
+        url:"/get_client_location",
+        dataType:"json",
+        data: { client_id: id },
+        success:function(response) {
+          jQuery('#invoice_invoice_number').val("affi-" + id + "-" + response.location + "-" + number );
+        }
+      });
+
+      jQuery('#invoice_bill_to').val(jQuery(this).find("option:selected").text()).attr('readonly', 'true');
+    });
+  });
+
+  jQuery(document).ready(function(){
+    jQuery('#duedate input.datepicker').datepicker({
+      orientation: "bottom left",
+      multidateSeparator: 12,
+      todayHighlight: true,
+       format: "dd/mm/yyyy",
+       startDate: "currentDate"
+    });
+
+    jQuery('#invoicedate input.datepicker').datepicker({
+      orientation: "left",
+      multidateSeparator: 12,
+      todayHighlight: true,
+       format: "dd/mm/yyyy",
+       startDate: "currentDate"
+    });
+  });
+
+  jQuery(document).ready(function(){
+    jQuery("#new_invoice").on('submit', function(){
+     if (jQuery('#invoice_invoice_date').val() > jQuery('#invoice_due_date').val())
+      {
+        alert ("Due Date should be in PAST or EQUAL to Inoice Date..!");
+        return false;
+      }
+    });
+  });
+
+</script>

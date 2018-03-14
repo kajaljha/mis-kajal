@@ -1,0 +1,47 @@
+<section id="main-content">
+  <section class="panel">
+   <div class="col-lg-12">
+     <section class="panel" style= padding-top:5px;>
+        <header class="panel-heading" style="background:#2a3542;color:#ffffff;">
+          <bold><h4>Basic Details</h4></bold>
+        </header>
+             
+            <%= form_for [current_user, current_user.build_client_basic_detail], :url =>client_basic_detail_create_user_sales_path(current_user), :method => "post"  do |f| %>
+                  <div class="panel-body">
+                  <div class=" form">
+                    <% if @client.errors.any? %>
+                    <div id="error_explanation" class ="alert alert-danger">
+                      <ul>
+                        <% @client.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                    <% end %>
+                    <div class="col-lg-9">
+                      <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                        <div class="form-group ">
+                          <label class="col-lg-3 control-label"> Name* </label>
+                          <div class="col-lg-8">
+                            <%= f.text_field :name, :class=>"form-control", :value => (current_user.first_name + " " + current_user.last_name if current_user.first_name.present? || f.object.new_record? ),:readonly => true %><br/>
+                          </div>
+                        </div>
+                        <div class="form-group ">
+                          <label class="col-lg-3 control-label"> Country*</label>
+                          <div class="col-lg-8">
+                            <%= f.select :location, select_tag = CS.countries.map { |c| ["#{c[1]}"+ " " + "(" + "#{c[0]}" + ")"]} , {}, class: "form-control"%><br/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-lg-offset-3 col-lg-9">
+                            <center> <button class="btn btn-danger" type="submit">Save Details</button></center>
+                          </div>
+                        </div>
+                    </div>
+                    </form>
+                  </div>
+               <% end %>
+            </section>
+        </div>
+  </section>
+</section>

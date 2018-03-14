@@ -1,0 +1,343 @@
+<br><br>
+<aside>
+  <div id="sidebar"  class="nav-collapse">
+    <!-- sidebar menu start-->
+    <ul class="sidebar-menu" id="nav-accordion">
+      <li class="sub-menu">
+      <li>
+      <!-- ********************* dashborad ****************** -->
+        <% if (current_user.role == "admin" || current_user.role == "Hr" || current_user.role == "Sales-BDE" || current_user.role == "Sales-consultant") %>
+          <a class="active" href="/users">
+          <i class="fa fa-dashboard"></i>
+          <span>Dashboard</span>
+          </a>
+        <% elsif current_user.role == "Employee" || current_user.role == "Client" %>
+          <%= link_to users_path, :class => "active" do %>
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+          <% end %>
+        <%end%>
+      </li>
+      
+      <!-- ********************* if admin ****************** -->
+      <% if current_user.role == "admin" %>
+        <li>
+          <% if params[:action] != "new" %>
+        <li><%= link_to '<i class="fa fa-users "></i> Create User'.html_safe, new_user_registration_path %></li>
+        <% else %>
+        <li><%= link_to '<i class="fa fa-chevron-circle-left"></i> Back'.html_safe, users_path %></li>
+        <% end %> 
+        </li>
+
+        <li id="my-leave" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-envelope-o"></i>
+          <span>Leaves</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "List of Leaves", user_holidays_path(current_user) %></li>
+          </ul>
+        </li>
+ 
+        <li><%= link_to "<i class='fa fa-bell-o'></i> Notifications".html_safe, user_notifications_path(current_user) %></li>
+
+         <!-- ********************* if hr ****************** -->
+      <% elsif current_user.role == "Hr" %>
+        <li>
+          <% if params[:action] != "new" %>
+        <li><%= link_to '<i class="fa fa-users "></i> Create User'.html_safe, new_user_registration_path %></li>
+        <% else %>
+        <li><%= link_to '<i class="fa fa-chevron-circle-left"></i> Back'.html_safe, users_path %></li>
+        <% end %> 
+        </li>
+        <li id="my-acc" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-user"></i>
+          <span>My Account</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "Employee Details",  user_employee_path(current_user, current_user)%></li>
+            <li><%=link_to "Academic Details", academic_skill_detail_display_user_employees_path(current_user) %></li>
+            <li><%= link_to "Salary Details", salary_display_user_employees_path(current_user) %></li>
+            <li><%=link_to "Bank Identity Details",  bank_identity_detail_display_user_employees_path(current_user) %></li>
+            <li><%=link_to "Previous Organisation", previous_organization_display_user_employees_path(current_user) %></li>
+          </ul>
+        </li>
+        <li id="my-proj" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-tasks"></i>
+          <span>My Projects</span>
+          </a>
+          <ul class="sub">
+            <li><%= link_to "Project Details", project_display_user_employees_path(current_user) %></li>
+          </ul>
+        </li>
+        <li id="my-leave" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-envelope-o"></i>
+          <span>Leaves</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "Apply for Leave", new_user_holiday_path(current_user) %></li>
+            <li><%=link_to "List of Leaves", user_holidays_path(current_user) %></li>
+          </ul>
+        </li>
+        <li id="notification" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-bell-o"></i>
+          <span>Notifications</span>
+          </a>
+          <ul class="sub">
+            <li><%= link_to "Create Notifications", new_user_notification_path(current_user) %></li>
+            <li><%= link_to "List All Notifications", user_notifications_path(current_user) %></li>
+          </ul>
+        </li>
+
+         <!-- ********************* if sales BDE ****************** -->
+      <% elsif current_user.role == "Sales-BDE" %>
+        <li>
+          <% if params[:action] != "new" %>
+            <li><%= link_to '<i class="fa fa-users "></i> Create User'.html_safe, new_user_registration_path %></li>
+          <% else %>
+            <li><%= link_to '<i class="fa fa-chevron-circle-left"></i> Back'.html_safe, users_path %></li>
+          <% end %> 
+        </li>
+        <li id="my-acc" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-user"></i>
+          <span>My Account</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "Employee Details",  user_employee_path(current_user, current_user)%></li>
+            <li><%=link_to "Academic Details", academic_skill_detail_display_user_employees_path(current_user) %></li>
+            <li><%= link_to "Salary Details", salary_display_user_employees_path(current_user) %></li>
+            <li><%=link_to "Bank Identity Details",  bank_identity_detail_display_user_employees_path(current_user) %></li>
+            <li><%= link_to "Previous Organisation", previous_organization_display_user_employees_path(current_user) %></li>
+            <li><%= link_to 'Sales-BDE', sales_bde_display_user_sales_path(current_user) %></li>
+          </ul>
+        </li>
+        <!-- <li id="my-proj" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-tasks"></i>
+          <span>My Projects</span>
+          </a>
+          <ul class="sub">
+            <li><%#= link_to "Project Details", project_display_user_employees_path(current_user) %></li>
+          </ul>
+        </li> -->
+        <li id="client-details" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-tasks"></i>
+          <span>Client Details</span>
+          </a>
+          <ul class="sub">
+            <li><%= link_to "<i class='fa fa-user'></i> Clients".html_safe, client_lists_user_sales_path(current_user) %></li>
+          </ul>
+        </li>
+
+        <li><%= link_to "<i class='fa fa-bell-o'></i> Notifications".html_safe, user_notifications_path(current_user) %></li>
+
+         <li id="my-invoice" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-file-text-o"></i>
+          <span>Invoices</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "Create Invoice", new_user_invoice_path(current_user) %></li>
+            <li><%=link_to "List Of Invoice", user_invoices_path(current_user) %></li>
+          </ul>
+        </li>
+        <li id="my-leave" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-envelope-o"></i>
+          <span>Leaves</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "Apply for Leave", new_user_holiday_path(current_user) %></li>
+            <li><%=link_to "List of Leaves", user_holidays_path(current_user) %></li>
+          </ul>
+        </li>
+
+         <!-- ********************* if sales CONSULTANT ****************** -->
+      <% elsif current_user.role == "Sales-consultant" %>
+        <li>
+          <% if params[:action] != "new" %>
+            <li><%= link_to '<i class="fa fa-users "></i> Create User'.html_safe, new_user_registration_path %></li>
+          <% else %>
+            <li><%= link_to '<i class="fa fa-chevron-circle-left"></i> Back'.html_safe, users_path %></li>
+          <% end %> 
+        </li>
+
+        <li id="my-acc" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-user"></i>
+          <span>My Account</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "Employee Details",  user_employee_path(current_user, current_user)%></li>
+            <li><%=link_to "Academic Details", academic_skill_detail_display_user_employees_path(current_user) %></li>
+            <li><%= link_to "Salary Details", salary_display_user_employees_path(current_user) %></li>
+            <li><%=link_to "Bank Identity Details",  bank_identity_detail_display_user_employees_path(current_user) %></li>
+            <li><%= link_to "Previous Organisation", previous_organization_display_user_employees_path(current_user) %></li>
+            <li><%= link_to 'Sales-Consultant', sales_consultant_display_user_sales_path(current_user) %></li>
+          </ul>
+        </li>
+        <!-- <li id="my-proj" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-tasks"></i>
+          <span>My Projects</span>
+          </a>
+          <ul class="sub">
+            <li><%#= link_to "Project Details", project_display_user_employees_path(current_user) %></li>
+          </ul>
+        </li> -->
+        <li id="client-details" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-tasks"></i>
+          <span>Client Details</span>
+          </a>
+          <ul class="sub">
+            <li><%= link_to "<i class='fa fa-user'></i> Clients".html_safe, client_lists_user_sales_path(current_user) %></li>
+          </ul>
+        </li>
+
+        <li><%= link_to "<i class='fa fa-bell-o'></i> Notifications".html_safe, user_notifications_path(current_user) %></li>
+
+         <li id="my-invoice" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-file-text-o"></i>
+          <span>Invoices</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "Create Invoice", new_user_invoice_path(current_user) %></li>
+            <li><%=link_to "List Of Invoice", user_invoices_path(current_user) %></li>
+          </ul>
+        </li>
+        <li id="my-leave" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-envelope-o"></i>
+          <span>Leaves</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "Apply for Leave", new_user_holiday_path(current_user) %></li>
+            <li><%=link_to "List of Leaves", user_holidays_path(current_user) %></li>
+          </ul>
+        </li>
+
+         <!-- ********************* if employeeee ****************** -->
+      <% elsif current_user.role == "Employee" %>
+        <li id="my-acc" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-user"></i>
+          <span>My Account</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "Employee Details",  user_employee_path(current_user, current_user)%></li>
+            <li><%=link_to "Academic Details", academic_skill_detail_display_user_employees_path(current_user) %></li>
+            <li><%= link_to "Salary Details", salary_display_user_employees_path(current_user) %></li>
+            <li><%=link_to "Bank Identity Details",  bank_identity_detail_display_user_employees_path(current_user) %></li>
+            <li><%= link_to "Previous Organisation", previous_organization_display_user_employees_path(current_user) %></li>
+          </ul>
+        </li>
+        <li id="my-proj" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-tasks"></i>
+          <span>My Projects</span>
+          </a>
+          <ul class="sub">
+            <li><%= link_to "Project Details", project_display_user_employees_path(current_user) %></li>
+          </ul>
+        </li>
+        <li id="my-leave" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-envelope-o"></i>
+          <span>Leaves</span>
+          </a>
+          <ul class="sub">
+            <li><%=link_to "Apply for Leave", new_user_holiday_path(current_user) %></li>
+            <li><%=link_to "List of Leaves", user_holidays_path(current_user) %></li>
+          </ul>
+        </li>
+
+        <li><%= link_to "<i class='fa fa-bell-o'></i> Notifications".html_safe, user_notifications_path(current_user) %></li>
+
+         <!-- ********************* if client ****************** -->
+      <% elsif current_user.role == "Client" %>
+      
+        
+        <li id="my-acc" class="sub-menu">
+          <a href="javascript:;">
+          <i class="fa fa-user"></i>
+          <span>My Account</span>
+          </a>
+        <ul class="sub">
+          <li><%=link_to "Basic Details", client_basic_detail_display_user_sales_path(current_user)%></li>
+          <li><%=link_to "Contact Details", client_contact_details_display_user_sales_path(current_user)%></li>
+          
+          <li><%=link_to "Assigned Resource Details", client_assigned_resources_display_user_sales_path(current_user)%></li>
+          <li><%=link_to "Payment Details",  client_payment_detail_display_user_sales_path(current_user)%></li>
+        </ul>
+        </li>
+
+        <li id="my-proj" class="sub-menu">
+            <a href="javascript:;">
+            <i class="fa fa-tasks"></i>
+            <span>My Projects</span>
+            </a>
+          <ul class="sub">
+            <li><%=link_to "Project Details", client_project_details_display_user_sales_path(current_user)%></li>
+          </ul>
+        </li>
+
+        <li>
+          <%= link_to "<i class='fa fa-file-text-o'></i> Invoices".html_safe, user_invoices_path(current_user) %>
+        </li>
+
+         <li id="my-feedback" class="sub-menu">
+          <a href="javascript:;">
+          <i class="glyphicon glyphicon-ok"></i>
+          <span>My Feedback</span>
+          </a>
+            <ul class="sub">
+          
+          <li><%=link_to "List of Feedback",  user_feedbacks_path(current_user)%></li>
+          <li><%=link_to "Add Feedback",  new_user_feedback_path(current_user)%></li>
+        </ul>
+        </li>
+
+      <% end %>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+<script type="text/javascript">
+  jQuery('li#my-acc > a').on( "click", function() {
+    jQuery('li#my-acc > a').toggleClass('active');
+    jQuery('li#my-acc').toggleClass('active');
+  });
+  jQuery('li#my-proj > a').on( "click", function() {
+    jQuery('li#my-proj > a').toggleClass('active');
+    jQuery('li#my-proj').toggleClass('active');
+  });
+  jQuery('li#notification > a').on( "click", function() {
+    jQuery('li#notification > a').toggleClass('active');
+    jQuery('li#notification').toggleClass('active');
+  });
+  jQuery('li#my-leave > a').on( "click", function() {
+    jQuery('li#my-leave > a').toggleClass('active');
+    jQuery('li#my-leave').toggleClass('active');
+  });
+  jQuery('li#my-invoice > a').on( "click", function() {
+    jQuery('li#my-invoice > a').toggleClass('active');
+    jQuery('li#my-invoice').toggleClass('active');
+  });
+  jQuery('li#client-details > a').on( "click", function() {
+    jQuery('li#client-details > a').toggleClass('active');
+    jQuery('li#client-details').toggleClass('active');
+  });
+  jQuery('li#my-feedback > a').on( "click", function() {
+    jQuery('li#my-feedback > a').toggleClass('active');
+    jQuery('li#my-feedback').toggleClass('active');
+  });
+</script>

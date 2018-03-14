@@ -1,0 +1,51 @@
+<section id="main-content">
+  <section class="panel">
+   <div class="col-lg-12">
+     <section class="panel" style= padding-top:5px;>
+        <header class="panel-heading" style="background:#2a3542;color:#ffffff;">
+          <bold><h4>BDE Details</h4></bold>
+        </header>
+      
+            <%= form_for [current_user, current_user.sales_bdes.build], :url =>sales_bde_create_user_sales_path(current_user), :method => "post"  do |f| %>
+                <div class="panel-body">
+                  <div class=" form">
+                    <% if @sale.errors.any? %>
+                      <div id="error_explanation" class ="alert alert-danger">
+                     <ul>
+                       <% @sale.errors.full_messages.each do |message| %>
+                       <li><%= message %></li>
+                       <% end %>
+                     </ul>
+                   </div>
+                  <% end %>
+                  <div class="col-lg-9">
+                    <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                      <div class="form-group ">
+                        <label class="col-lg-3 control-label"> Sales Id:* </label>
+                        <div class="col-lg-8">
+                          <%= f.text_field :sales_id, :class=>"form-control", :required => true %><br/>
+                        </div>
+                      </div>
+
+                      <div class="form-group ">
+                        <label class="col-lg-3 control-label"> Skype Id:* </label>
+                         <div class="col-lg-8">
+                           <%= f.text_field :skype_id, :class=>"form-control", :value => (EmployeeDetail.find_by_user_id(@sale.user_id).skype_id),:readonly => true %><br/>   
+                         </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-lg-offset-3 col-lg-8">
+                          <center><button class="btn btn-danger" type="submit">Save BDE Details</button></center>
+                        </div>
+                      </div>
+                  </div>
+                </form>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+</section>

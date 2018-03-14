@@ -1,0 +1,100 @@
+<section id="main-content">
+   <section class="wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+           <section class="panel">
+              <header class="panel-heading" style="background:#2a3542;height:50px;color:#ffffff;">
+                <bold><h4>Employee Details</h4></bold>
+              </header>
+                <div  style=" 
+                   height: 500px;
+                    overflow: auto;">
+                   <table class="table" border="2">
+                     <tr>
+                       <strong>
+                        <th colspan="2" style="background:#FFFFE0;">BASIC DETAILS</th>
+                       </strong>
+                    </tr>
+                       <th>First Name</th>
+                        <td><%= @employee.first_name.titleize %></td>
+                    </tr>
+                    <tr>
+                      <th>Last Name </th>
+                      <td><%= @employee.last_name.titleize %></td>
+                    </tr>
+                    <tr>
+                      <th>Date Of Birth </th>
+                      <td><%= @employee.dob %></td>
+                    </tr>
+                    <tr>
+                      <th>Date Of Joining</th>
+                      <td><%= @employee.doj %></td>
+                    </tr>
+                    <tr>
+                      <th>Blood Group</th>
+                      <td><%= @employee.blood_group %></td>
+                    </tr>
+                    <tr>
+                      <th>Designation</th>
+                      <td><%= @employee.designation %></td>
+                    </tr>
+                    <tr>
+                      <strong>
+                        <th colspan="2" style="background:#FFFFE0;">CONTACT DETAILS</th>
+                      </strong>
+                    </tr>
+                    <tr>
+                      <th>Personal Email Id</th>
+                      <td><%= @employee.personal_email_id %></td>
+                    </tr>
+                    <tr>
+                     <th>Official Email Id</th>
+                     <td><%= @employee.oficial_email_id %></td>
+                    </tr>
+                    <tr>
+                      <th>Skype Id</th>
+                      <td><%= @employee.skype_id %></td>
+                    </tr>
+                    <tr>
+                      <th>Mobile No</th>
+                      <td><%= @employee.mobile %></td>
+                    </tr>
+                    <tr>
+                      <th>Landline No</th> 
+                      <td><%= @employee.landline %></td>
+                    </tr>
+                    <tr>
+                      <th>Current Address</th>
+                      <td><%= @employee.current_address %></td>
+                    </tr>
+                    <tr>
+                      <th>Permanent Address</th>
+                      <td><%= @employee.permanent_address %></td>
+                    </tr>
+                     <tr>
+                     <tr>
+                      <strong><th colspan="2" style="background:#FFFFE0;">PARENTS & GAURDIAN DETAILS</th></strong></tr>
+                       <th>Guardian Full Name</th>
+                       <td><%= @employee.guardian_full_name.titleize %></td>
+                     </tr>
+                     <tr>
+                      <th>Guardian Mobile No</th>
+                      <td><%= @employee.guardian_mobile %></td>
+                    </tr>
+                    <tr>
+                      <th>Guardian Landline No</th>
+                      <td><%= @employee.guardian_landline %></td>
+                    </tr>
+                    <tr>
+                      <th>Guardian Address</th>   
+                      <td><%= @employee.guardian_address %></td>
+                    </tr>
+              </table>
+         </div >
+
+           <h4 style="padding-left:10px"><%= link_to "Edit",edit_user_employee_path(current_user,@employee) ,class: "btn btn-primary btn-xs"%></h4><br/>
+        </section>
+      </div>
+     </div>
+   </section>
+</section>

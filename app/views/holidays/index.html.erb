@@ -1,0 +1,95 @@
+<!-- ////////////////////////// -->
+<section id="main-content">
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <section class="panel">
+          <header class="panel-heading" style="background:#2a3542;color:#ffffff;height:50px;">
+            List of Leaves
+          </header>
+             <div style=" height: 400px; overflow: auto;">
+           <table class="col-lg-12 table-bordered table-striped table-hover" >
+              <thead> 
+                  <tr style="height:40px;">
+                    <th>Availability</th>
+                    <th>Currently Working On</th>
+                    <th>Sales Email Id</th>
+                    <th>Leave Type</th>
+                    <th>Leave From Date</th>
+                    <th>Leave to Date</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>
+                        <% if current_user.role == "admin" || current_user.role == "Hr" %>
+                             comment
+                        <% end %>
+                    </th>
+                    <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+              
+                <% @holiday.each do |holiday| %>
+             
+                  <tr>
+                    <td><%= holiday.availability %></td>
+                    <td><%= holiday.currently_working_on%></td>
+                    <td><%= holiday.sales_email_id %></td>
+                    <td><%= holiday.leave_type %></td>
+                    <td><%= holiday.leave_from_date%></td>
+                    <td><%= holiday.leave_to_date %></td>
+                    <td><%= holiday.reason%></td>
+                    <td>
+                        <% if holiday.status == nil  %>
+                            <p>Pending</p>
+                        <% elsif holiday.status == true %> 
+                            <p>Accepted</p>
+                        <%else holiday.status == false %>
+                            <p>Rejected</p>
+                        <%end%>
+                    </td>
+                    <td>
+                      <% if current_user.role == "admin" || current_user.role == "Hr" %>
+                        <%= holiday.comment%>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to "Delete", user_holiday_path(current_user,holiday), method: :delete, class: "btn btn-primary btn-xs", data: { confirm: "Are you sure, you want to delete leave?"} %>
+                    </td> 
+                    <td>
+                      <%= link_to 'View', user_holiday_path(current_user, holiday), class: "btn btn-primary btn-xs" %>
+                    </td>
+                    <td>
+                      <% if current_user.role == "admin" || current_user.role == "Hr" %>
+                       <%= link_to "Show", edit_user_holiday_path(current_user,holiday),class: "btn btn-primary btn-xs"%>
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if holiday.status == nil && current_user.role == "admin" || current_user.role == "Hr" %>
+
+                       <%= link_to "Accept", leave_accept_user_holidays_path(:user_id=>current_user,:id=>holiday), class: "btn btn-primary btn-xs"%>
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if holiday.status == nil && current_user.role == "admin" || current_user.role == "Hr" %>
+                       <%= link_to "Reject", leave_reject_user_holidays_path(:user_id=>current_user,:id=>holiday),class: "btn btn-primary btn-xs"%>
+                      <% end %> 
+                    </td>
+                  </tr>
+                  
+                <% end %>
+               
+             </tbody>
+           </table>
+            </div>
+           <br/>
+          <% if current_user.role == "Employee" || current_user.role == "Hr" %>
+          <%= link_to "Add More",  new_user_holiday_path(current_user),class: "btn btn-primary btn-xs" %>
+          <% end %>
+        </section>
+      </div>
+    </div>
+  </section>
+</section>
+
+ 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><b>Hello Admin,</b></p>
+    <p>
+      <%= @user.first_name %> has joined Affimintus as <b><%= @user.role.capitalize %></b> and account is created in MIS. <br>
+    </p>
+    <p>
+      Email ID is <%= @user.email %><br>
+    </p>
+    <p>Login Details:-</p>
+    <p>
+      Username: <%= @user.user_name %><br/>
+      Password: <%= @user.first_name.downcase + @user.last_name[0].downcase + "@123" %>
+    </p>
+  </body>
+</html>

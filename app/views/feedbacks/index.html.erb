@@ -1,0 +1,60 @@
+<section id="main-content">
+ <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+          <section class="panel">
+             <header class="panel-heading" style="background:#C5C1AA;height:50px;">
+                <bold><h4>Feedback Details</h4></bold>
+              </header>
+                    <table class="table-bordered table-striped table-hover ">
+                      <thead>
+                        <tr>
+                          <th>Project Name</th>
+                          <th>Punctuality</th>
+                          <th>Communication</th>
+                          <th>Behavior</th>
+                          <th>Meet To Deadline</th>
+                          <th>Daily Reporting</th>
+                          <th>Problem Solving</th>
+                          <th>Research Capabilities</th>
+                          <th>Self Motivated</th>
+                          <th>Understanding of Tasks</th>
+                          <th>Working in a Team</th>
+                          <th>Overall Rating</th>
+                          <th>Remark</th>
+                          <th>Feedback</th>
+                          <th></th>
+                       </tr>
+                      </thead>
+                      <tbody>
+                        <% @feedback.each do |feedback| %>
+                          <tr>
+                            <td><%= feedback.client_project_detail.project_name  rescue nil %></td>
+                            <td><%= feedback.punctuality%></td>
+                            <td><%= feedback.communication %></td>
+                            <td><%= feedback.behavior %></td>
+                            <td><%= feedback.meet_to_deadline %></td>
+                            <td><%= feedback.daily_reporting %></td>
+                            <td><%= feedback.problem_solving%></td>
+                            <td><%= feedback.research_capabilities %></td>
+                            <td><%= feedback.self_motivated %></td>
+                            <td><%= feedback.understanding_of_tasks %></td>
+                            <td><%= feedback.working_in_a_team %></td>
+                            <td><%= feedback.overall_rating%></td>
+                            <td><%= feedback.remark %></td>
+                            <td><%= feedback.feedback %></td>
+                            
+                            
+                            <td><%= link_to "Edit",  edit_user_feedback_path(current_user,feedback),class: "btn btn-primary btn-xs" %></td>
+                            <td><%= link_to "Show",  user_feedback_path(current_user,feedback),class: "btn btn-primary btn-xs" %></td>
+                            <td><%= link_to "Delete", user_feedbacks_path(current_user,feedback), method: :delete, class: "btn btn-primary btn-xs", data: { confirm: "Are you sure, you want to delete leave?"} %></td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                </section>
+              <%= link_to "Add More",  new_user_feedback_path(current_user), class: "btn btn-primary btn-xs" %>
+          </div>
+      </div>
+   </section>
+</section>

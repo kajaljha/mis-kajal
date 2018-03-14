@@ -1,0 +1,60 @@
+<section id="main-content">
+  <section class="panel">
+   <div class="col-lg-12">
+     <section class="panel" style= padding-top:5px;>
+        <header class="panel-heading" style="background:#2a3542;color:#ffffff;">
+          <bold><h4>Create A New Notification</h4></bold>
+        </header>
+              <%= form_for @notification, url: (@notification.persisted? ? user_notification_path(current_user,@notification) : user_notifications_path(current_user)) do |f| %>
+                <div class=" col-lg-3">
+                </div>
+                <div class="panel-body">
+                  <div class="form">
+                    <% if @notification.errors.any? %>
+                      <div id="error_explanation" class ="alert alert-danger">
+                        <ul>
+                          <% @notification.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                          <% end %>
+                        </ul>
+                       </div>
+                    <% end %>
+                    <div class=" form col-lg-9">
+                      <form class="cmxform form-horizontal tasi-form" id="commentForm" method="get" action="">
+                      <!-- <div class="form-group "> -->
+                        <div class="form-group ">
+                          <label class="col-lg-3 control-label"> Title* </label>
+                          <div class="col-lg-8">
+                            <%= f.text_field :title, :class=>"form-control", :style => "text-transform: capitalize;" %><br />
+                          </div>
+                        </div>
+
+                        <div class="form-group ">
+                          <label class="col-lg-3 control-label"> Description* </label>
+                            <div class="col-lg-8">
+                              <%= f.text_area :description, :style => "text-transform: capitalize;", :class=>"form-control" %><br />
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                          <label class="col-lg-3 control-label"> Remark </label>
+                            <div class="col-lg-8">
+                              <%= f.text_field :remark, :style => "text-transform: capitalize;", :class=>"form-control" %><br />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="col-lg-offset-3 col-lg-8">
+                            <center><button class="btn btn-danger" type="submit">Create Notification</button>
+                            </center>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </section>
+          </div>
+   </section>
+</section>

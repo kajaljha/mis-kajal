@@ -1,0 +1,41 @@
+<section id="main-content">
+ <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+  <section class="panel">
+    <header class="panel-heading" style="background:#2a3542;height:50px;color:#ffffff;">
+      <bold><h4>Academic Details</h4></bold>
+    </header>
+  <table class="col-md-12 table table-bordered table-striped table-hover table-condensed">
+    <thead>
+      <tr>
+        <th>Course Name</th>
+        <th>University Name</th>
+        <th>Year Of Passing</th>
+        <th>Percentage</th>
+        <th>Board</th>
+        <th>Action</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      <% @academices.each do |academic| %>
+        <tr>
+          <td><%= academic.course_name %></td>
+          <td><%= academic.university_name%></td>
+          <td><%= academic.year_of_passing %></td>
+          <td><%= academic.percentage %></td>
+          <td><%= academic.board%></td>
+          <td><%= link_to "Edit",  academic_skill_detail_edit_user_employees_path(current_user, :academic => academic),class: "btn btn-primary btn-xs" %></td>
+        </tr>
+      <% end %>
+
+     </tbody>
+  </table>
+  </section>
+  <br>
+  <%= link_to "Add More",  academic_skill_detail_new_user_employees_path(current_user), class: "btn btn-primary btn-xs" %>
+  </div>
+  </div>
+  </section>
+</section>

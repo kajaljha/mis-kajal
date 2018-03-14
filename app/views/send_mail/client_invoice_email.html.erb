@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+   <body>
+    <p>Hello,<%=@client.first_name%>
+      Your Invoice has been created  successfully in our MIS system.<br>
+      Your Invoice Detils:-<br/>
+      Invoice No-<%= @invoice.invoice_number %><br/>
+      currency-<%= @invoice.currency %><br/>
+      Due date-<%= @invoice.due_date %><br/>
+      Note-<%= @invoice.note %><br/>
+      Discount-<%= @invoice.discount %><br/>
+
+
+    </p>
+  
+    <p>Thanks for joining Affimintus family and have a great time!</p>
+    <br/>
+    <p>Best</p>
+    <p>Team Affimintus</p>
+  </body>
+</html>

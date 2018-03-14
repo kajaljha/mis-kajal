@@ -1,0 +1,47 @@
+<br><br>
+
+<div class="container">
+ <table border="1" style="width:100%" >
+ <thead>
+  <tr>
+    <th>Username</th>
+    <th>Role</th>
+  </tr>
+  </thead>
+    <tr>
+    <% @hr.each do |hr| %>
+      <td><%= hr.user_name %></td>
+      <%= form_for :user, url: user_path(@user), method: :patch  do |f| %>
+
+        <td><%= f.radio_button :role, :checked => Proc.new { hr.role == "Employee" ? true : false } %>Employee</td>
+        <td><%= f.radio_button :role, :checked => Proc.new { hr.role == "Hr" ? true : false } %>Hr</td>
+        <td><%= f.radio_button :role, :checked => Proc.new { hr.role == "Client" ? true : false } %>Client</td>
+        <td><%= f.submit "update" %></td>
+      <% end %>
+    <% end %>
+    
+    <tr>
+    </tr>
+    <% @emp.each do |emp| %>
+    <tr>
+      <td><%= emp.user_name %></td>
+      <td><%= emp.role %>
+      <%= form_for :user, url: user_path(@user), method: :patch  do |f| %>
+        <%= f.check_box :role %></td>
+        <td><%= f.submit "update" %></td>
+      <% end %>
+    </tr>
+    <% end %>
+
+    <% @sales.each do |sale| %>
+    <tr>
+      <td><%= sale.user_name %></td>
+      <td><%= sale.role %>
+      <%= form_for :user, url: user_path(@user), method: :patch  do |f| %>
+        <%= f.check_box :role %></td>
+        <td><%= f.submit "update" %></td>
+      <% end %>
+    </tr>
+    <% end %>  
+</table> 
+</div>

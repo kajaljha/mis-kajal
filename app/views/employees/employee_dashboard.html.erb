@@ -1,0 +1,47 @@
+<section id="main-content">
+<section class = "panel" style ="margin:20px">
+ <section class="panel" >
+  <h3 style="background:#2a3542;height:35px;padding-top:5px;padding-left:12px;color:#ffffff;">Personal Details</h3></section>
+  <div>
+   <img src="" style="width:20%;height:20%;float:left">
+  </div>
+    <div >
+    <label style="padding-left:5px"> User Name </label>
+      <%= current_user.first_name + " " + current_user.last_name if current_user.first_name.present? %>
+    <br/>
+    <label style="padding:5px"> First Name </label>
+      <%= current_user.first_name if current_user.first_name.present? %><br/>
+    <label style="padding:5px"> Last Name </label>
+     <%= current_user.last_name if current_user.last_name.present? %>
+    <br/>
+
+    <% if current_user.role == "Employee" %>
+      <label style="padding:5px"> Date Of Birth </label>
+        <% if current_user.employee_detail.present? %>
+         <%= current_user.employee_detail.dob if current_user.employee_detail.dob.present? %>
+        <%end%>
+      <br/>
+       <label style="padding:5px"> Mobile No </label>
+       <% if current_user.employee_detail.present? %>
+        <%= current_user.employee_detail.mobile if current_user.employee_detail.mobile.present? %>
+       <%end%><br/>
+    <% elsif current_user.role == "Client" %>
+       <label style="padding:5px"> Phone Number </label>
+        <% if current_user.client_contact_detail.present? %>
+         <%= current_user.client_contact_detail.phone_no if current_user.client_contact_detail.phone_no.present? %>
+        <%end%>
+      <br/>
+       <label style="padding:5px"> Project Name </label>
+       <% if current_user.client_project_details.present? %>
+        <% current_user.client_project_details.each do |project_name| %>
+          <%= project_name.id %>
+          <%= project_name.project_name %> ,
+        <%end%>
+       <%end%><br/>
+    <% end %>
+      <label style="padding:5px"> Email Id </label>
+        <%= current_user.email if current_user.email.present? %>
+      <br/>
+      <label style="padding:5px"> Note: <font color="red">You are not authorized to change these data, if anything is missing or incorrect, Please contact HR department for same.</font></label>
+  </div>
+</section>

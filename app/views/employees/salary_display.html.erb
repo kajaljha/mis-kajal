@@ -1,0 +1,37 @@
+<section id="main-content">
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <section class="panel">
+          <header class="panel-heading" style="background:#2a3542;height:50px;color:#ffffff;">
+            Salary Details
+          </header>
+                <table class = "table" border="2">
+                   <tr>
+                    <th>User Type</th>
+                    <td><%= @salary.user_type %></td>
+                  </tr>
+                  <tr>
+                    <th>Current Salary</th>
+                    <td><%= @salary.ctc %></td>
+                  </tr>
+                  <tr>
+                    <th>Salary in Training</th>
+                    <td><%= @salary.training_salary %></td>
+                  </tr>
+                  <tr>
+                    <th>Salary in Probation</th>
+                    <td><%= @salary.probation_salary %></td>
+                  </tr>
+                  <tr>
+                    <th>Salary in Confirmed</th>
+                    <td><%= @salary.confirmed_salary %></td>
+                  </tr>
+               </table>
+             
+                 <%= link_to "Edit",  salary_details_edit_user_employees_path(current_user),class: "btn btn-primary btn-xs" %>
+        </section>
+      </div>
+    </div>
+  </section>
+</section>

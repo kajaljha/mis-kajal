@@ -1,0 +1,47 @@
+<section id="main-content">
+ <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+  <section class="panel">
+          <header class="panel-heading" style="background:#2a3542;height:50px;color:#ffffff;">
+             <bold><h4>Previous Organization Details</h4></bold>
+          </header>
+  <table class="col-md-12 table table-bordered table-striped table-hover table-condensed">
+    <thead>
+   
+    <tr>
+      <th>Company Name</th>
+      <th>Location</th>
+      <th>Designation</th>
+      <th>From Year</th>
+      <th>To Year</th>
+      <th>Last Salary</th>
+      <th>Reason For Leave</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @previous.each do |pre| %>
+      <% if current_user.id == pre.user_id %>
+      <tr>
+        <td><%= pre.company_name %></td>
+        <td><%= pre.location.titleize %></td>
+        <td><%= pre.designation %></td>
+        <td><%= pre.from_month_year %></td>
+        <td><%= pre.to_month_year %></td>
+        <td><%= pre.last_ctc %></td>
+        <td><%= pre.leave_reason %></td>
+        <td><%= link_to "Edit",  previous_organization_edit_user_employees_path(current_user, :prevorg => pre),class: "btn btn-primary btn-xs" %></td>
+      </tr>
+      <% end %>
+    <% end %>
+ </tbody>
+</table>
+</section>
+  <br />
+  <%= link_to "Add More",  previous_organization_detail_new_user_employees_path(current_user),class: "btn btn-primary btn-xs" %>
+</section>
+</div>
+  </div>
+  </section>
+</section>

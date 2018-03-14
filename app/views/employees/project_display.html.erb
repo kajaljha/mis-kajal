@@ -1,0 +1,49 @@
+<section id="main-content">
+ <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+  <section class="panel">
+          <header class="panel-heading" style="background:#2a3542;height:50px;color:#ffffff;">
+            <bold><h4>Project Details</h4></bold>
+          </header>
+  <table class="col-md-12 table table-bordered table-striped table-hover table-condensed">
+    <thead>
+
+      <tr>
+        <th>Project Name</th>
+        <th>Your Role</th>
+        <th>Project Url</th>
+        <th>Project Duration</th>
+        <th>Project Description</th>
+        <th>Technical Stack</th>
+        <th>Client Name</th>
+        <th>Company Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <% if current_user.id == project.user_id %>  
+          <tr>
+            <td><%= project.project_name %></td>
+            <td><%= project.your_role %></td>
+            <td><%= project.project_url %></td>
+            <td><%= project.project_duration %></td>
+            <td><%= project.project_desc %></td>
+            <td><%= project.technical_stack %></td>
+            <td><%= project.client_name.titleize %></td>
+            <td><%= project.comp_name %></td>
+            <td><%= link_to "Edit",  project_detail_edit_user_employees_path(current_user, :projectdetail => project),class: "btn btn-primary btn-xs"%></td>
+          </tr>
+        <% end %> 
+      <% end %>   
+    </tbody>
+  </table>
+  </section>
+  <% if current_user.role == "Employee" || current_user.role == "admin" %>
+  <%= link_to "Add More",  project_detail_new_user_employees_path(current_user),class: "btn btn-primary btn-xs" %>
+  <% end %>
+  </div>
+  </div>
+  </section>
+</section>
